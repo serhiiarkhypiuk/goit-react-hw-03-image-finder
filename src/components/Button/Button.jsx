@@ -1,11 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 export const Button = ({ onClick }) => {
   return (
-    <LoadButton type="button" onClick={onClick}>Load More</LoadButton>
-  )
-}
+    <LoadButton type="button" onClick={onClick}>
+      Load More
+    </LoadButton>
+  );
+};
 
 const LoadButton = styled.button`
   background-color: #3f51b5;
@@ -18,4 +20,8 @@ const LoadButton = styled.button`
   padding: 0.5rem 0;
   border-radius: 2px;
   margin: auto;
-`
+  &:hover,
+  :focus {
+    background-color: #303f9f;
+  }
+`;

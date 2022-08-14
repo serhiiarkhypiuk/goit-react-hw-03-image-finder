@@ -1,19 +1,19 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const ImageGalleryItem = ({ id, small, large, alt}) => {
+const ImageGalleryItem = ({ image, id, small, alt, onClick }) => {
   return (
-    <GalleryItem key={id} className="gallery-item">
+    <GalleryItem key={id} onClick={() => onClick(image)}>
       <GalleryItemImage src={small} alt={alt} />
     </GalleryItem>
-  )
-}
+  );
+};
 
 const GalleryItem = styled.li`
   border-radius: 2px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-`
+`;
 
 const GalleryItemImage = styled.img`
   width: 100%;
@@ -24,6 +24,6 @@ const GalleryItemImage = styled.img`
     transform: scale(1.03);
     cursor: zoom-in;
   }
-`
+`;
 
-export default ImageGalleryItem
+export default ImageGalleryItem;

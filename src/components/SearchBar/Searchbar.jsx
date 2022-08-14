@@ -1,30 +1,29 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
 class Searchbar extends Component {
   state = {
-    imageQuery: "",
-  }
+    imageQuery: '',
+  };
 
   handleChange = event => {
-    this.setState({ imageQuery: event.currentTarget.value.toLowerCase() })
-  }
+    this.setState({ imageQuery: event.currentTarget.value.toLowerCase() });
+  };
 
   handleSubmit = event => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (this.state.imageQuery.trim() === '') {
-      alert('Please enter your search query')
-      return
+      alert('Please enter your search query');
+      return;
     }
 
-    this.props.onSubmit(this.state.imageQuery)
-    this.setState({ imageQuery: "" })
-  }
-  
-  render()
-    {
-      return (
+    this.props.onSubmit(this.state.imageQuery);
+    this.setState({ imageQuery: '' });
+  };
+
+  render() {
+    return (
       <SearchHeader>
         <SearchForm onSubmit={this.handleSubmit}>
           <SearchFormButton type="submit" onClick={this.handleSubmit}>
@@ -42,7 +41,8 @@ class Searchbar extends Component {
           />
         </SearchForm>
       </SearchHeader>
-    )}
+    );
+  }
 }
 
 const SearchHeader = styled.header`
@@ -62,9 +62,9 @@ const SearchHeader = styled.header`
   background-color: #3f51b5;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-`
+`;
 
-const SearchForm = styled.form `
+const SearchForm = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
@@ -72,9 +72,9 @@ const SearchForm = styled.form `
   background-color: #fff;
   border-radius: 3px;
   overflow: hidden;
-`
+`;
 
-const SearchFormButton = styled.button `
+const SearchFormButton = styled.button`
   display: inline-block;
   width: 48px;
   height: 48px;
@@ -90,7 +90,7 @@ const SearchFormButton = styled.button `
   &:hover {
     opacity: 1;
   }
-`
+`;
 
 const SearchFormButtonLabel = styled.span`
   position: absolute;
@@ -102,7 +102,7 @@ const SearchFormButtonLabel = styled.span`
   white-space: nowrap;
   clip-path: inset(50%);
   border: 0;
-`
+`;
 
 const Input = styled.input`
   display: inline-block;
@@ -117,6 +117,6 @@ const Input = styled.input`
     font: inherit;
     font-size: 18px;
   }
-`
+`;
 
-export default Searchbar
+export default Searchbar;

@@ -1,16 +1,23 @@
-import React from "react";
-import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
-import styled from "styled-components";
+import React from 'react';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import styled from 'styled-components';
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, onOpenModal }) => {
   return (
-    <Gallery className="gallery">
+    <Gallery>
       {images.map(image => (
-        <ImageGalleryItem key={image.id} small={image.webformatURL} large={image.largeImageURL} alt={image.tags} />
+        <ImageGalleryItem
+          onClick={onOpenModal}
+          image={image}
+          key={image.id}
+          small={image.webformatURL}
+          large={image.largeImageURL}
+          alt={image.tags}
+        />
       ))}
     </Gallery>
-  )
-}
+  );
+};
 
 const Gallery = styled.ul`
   display: grid;
@@ -23,6 +30,6 @@ const Gallery = styled.ul`
   list-style: none;
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
-export default ImageGallery
+export default ImageGallery;
