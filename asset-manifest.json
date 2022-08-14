@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/serhiiarkhypiuk/goit-react-hw-03-image-finder.git/static/css/main.95016bc3.css",
+    "main.js": "/serhiiarkhypiuk/goit-react-hw-03-image-finder.git/static/js/main.7207838c.js",
+    "index.html": "/serhiiarkhypiuk/goit-react-hw-03-image-finder.git/index.html",
+    "main.95016bc3.css.map": "/serhiiarkhypiuk/goit-react-hw-03-image-finder.git/static/css/main.95016bc3.css.map",
+    "main.7207838c.js.map": "/serhiiarkhypiuk/goit-react-hw-03-image-finder.git/static/js/main.7207838c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95016bc3.css",
+    "static/js/main.7207838c.js"
+  ]
+}
