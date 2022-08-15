@@ -4,10 +4,10 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import ImageErrorView from './ImageErrorView/ImageErrorView';
 import '../styles.css';
 import { Button as LoadMoreButton } from './Button/Button';
-import styled from 'styled-components';
+import { Div, IntroductoryText } from './SearchBar/Searchbar.styled';
 import Loader from './Loader/Loader';
 import ModalWindow from './Modal/Modal';
-import api from 'Services/services';
+import api from 'services/services';
 
 class App extends Component {
   state = {
@@ -32,17 +32,24 @@ class App extends Component {
     const { page, imageQuery } = this.state;
 
     if (prevState.imageQuery !== imageQuery || prevState.page !== page) {
-      this.setState({ status: 'pending', images: [] });
+      this.setState({ status: 'pending' });
 
       api
         .getImages(imageQuery, page)
         .then(results => results.hits)
-        .then(images =>
-          this.setState(prevState => ({
-            images: [...prevState.images, ...images],
-            status: 'resolved',
-          }))
-        )
+        .then(images => {
+          if (prevState.imageQuery !== imageQuery) {
+            this.setState({
+              images: images,
+              status: 'resolved',
+            });
+          } else {
+            this.setState(prevState => ({
+              images: [...prevState.images, ...images],
+              status: 'resolved',
+            }));
+          }
+        })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
 
@@ -50,7 +57,7 @@ class App extends Component {
   }
 
   handleFormSubmit = imageQuery => {
-    this.setState({ imageQuery, page: 1 });
+    this.setState({ imageQuery: imageQuery, page: 1 });
   };
 
   onLoadMore = () => {
@@ -101,17 +108,5 @@ class App extends Component {
     );
   }
 }
-
-const IntroductoryText = styled.h1`
-  color: #3f51b5;
-  margin: auto;
-`;
-
-const Div = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 16px;
-  padding-bottom: 24px;
-`;
 
 export default App;

@@ -1,11 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Error } from './ImageErrorView.styled';
 
 export default function ImageErrorView({ message }) {
   return <Error role="alert">{message}</Error>;
 }
-
-const Error = styled.h1`
-  color: #3f51b5;
-  margin: auto;
-`;
