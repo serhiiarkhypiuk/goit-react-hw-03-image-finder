@@ -7,6 +7,7 @@ import { Button as LoadMoreButton } from './Button/Button';
 import styled from 'styled-components';
 import Loader from './Loader/Loader';
 import ModalWindow from './Modal/Modal';
+import api from 'Services/services';
 
 class App extends Component {
   state = {
@@ -20,7 +21,7 @@ class App extends Component {
   };
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+    this.imagesEnd.scrollIntoView({ behavior: 'smooth' });
   };
 
   componentDidMount() {
@@ -30,40 +31,11 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { page, imageQuery } = this.state;
 
-    if (prevState.imageQuery !== imageQuery) {
-      this.setState({ status: 'pending', page: 1 });
+    if (prevState.imageQuery !== imageQuery || prevState.page !== page) {
+      this.setState({ status: 'pending', images: [] });
 
-      fetch(`https://pixabay.com/api/?q=${imageQuery}
-        &page=${page}
-        &key=27902479-6e547d16e6e2929c1a5ae9702&image_type=photo&orientation=horizontal&per_page=12`)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-
-          return Promise.reject(
-            new Error(`No images regarding ${imageQuery} was found`)
-          );
-        })
-        .then(results => results.hits)
-        .then(images => this.setState({ images: images, status: 'resolved' }))
-        .catch(error => this.setState({ error, status: 'rejected' }));
-    }
-
-    if (prevState.page !== page) {
-      this.setState({ status: 'pending' });
-
-      fetch(`https://pixabay.com/api/?q=${imageQuery}
-        &page=${page}
-        &key=27902479-6e547d16e6e2929c1a5ae9702&image_type=photo&orientation=horizontal&per_page=12`)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          return Promise.reject(
-            new Error(`No images regarding ${imageQuery} was found!`)
-          );
-        })
+      api
+        .getImages(imageQuery, page)
         .then(results => results.hits)
         .then(images =>
           this.setState(prevState => ({
@@ -78,7 +50,7 @@ class App extends Component {
   }
 
   handleFormSubmit = imageQuery => {
-    this.setState({ imageQuery });
+    this.setState({ imageQuery, page: 1 });
   };
 
   onLoadMore = () => {
@@ -122,7 +94,7 @@ class App extends Component {
         <div
           style={{ float: 'left', clear: 'both' }}
           ref={el => {
-            this.messagesEnd = el;
+            this.imagesEnd = el;
           }}
         ></div>
       </Div>
